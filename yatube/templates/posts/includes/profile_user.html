@@ -1,0 +1,77 @@
+<div class="container d-flex justify-content-center align-items-center">
+             
+    <div class="card col-md-12 mb-5">
+
+     <div class="user text-center">
+
+       <div class="profile">
+
+         <img src="{{profile.profile_image.url}}" class="rounded-circle" width="120">
+         
+       </div>
+
+     </div>
+
+
+     <div class="mt-5 text-center">
+
+       <h4 class="mb-0">
+            {% if author.get_full_name%}
+                {{ author.get_full_name }}
+            {%endif%}
+            {% if not author.get_full_name%}
+                {{ author.username}}
+            {%endif%}
+        </h4>
+       <span class="text-muted d-block mb-2">
+        {{ profile.description }}
+       </span>
+
+        {% if user != author %}
+            {% if following %}
+                <a
+                    class="btn btn-sm btn-light "
+                    href="{% url 'posts:profile_unfollow' author.username %}" role="button"
+                >
+                    Отписаться
+                </a>
+            {% else %}
+            <a
+            class="btn btn-sm btn-primary"
+            href="{% url 'posts:profile_follow' author.username %}" role="button"
+            >
+                Подписаться
+            </a>
+            {% endif %}
+        {% endif%}
+
+
+       <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+
+         <div class="stats">
+           <h6 class="mb-0">Подписчиков</h6>
+           <span>{{ follower_count }}</span>
+
+         </div>
+
+
+         <div class="stats">
+           <h6 class="mb-0">Публикаций</h6>
+           <span>{{ posts_count }}</span>
+
+         </div>
+
+
+         <div class="stats">
+           <h6 class="mb-0"> Лайков (добавить позже)</h6>
+           <span>129</span>
+
+         </div>
+         
+       </div>
+       
+     </div>
+      
+    </div>
+
+  </div>
